@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Forum</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-</body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</head>
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+    <a class="navbar-brand" href="#"><img src="img/forumlogo.png" alt="logo"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="index.html">Domov</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="categories.html">Kategórie</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">O projekte</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Prihlásenie</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hlavná Sekcia -->
+<div class="container-fluid bg-primary text-white text-center py-5">
+    <h1>Vitaj na fóre!</h1>
+    <a href="#" class="btn btn-light btn-lg">Pridaj sa!</a>
+</div>
+
+<!-- Hot Topics Sekcia -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Horúce Témy</h2>
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+            Ako začať s programovaním v Pythone?
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Najnovšie trendy v umelej inteligencii
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Výhody a nevýhody práce na diaľku
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Top 5 hier roka 2024
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Aké gadgety sú teraz populárne?
+        </a>
+    </div>
+</div>
+
+<!-- Recent Sekcia -->
+<div class="container my-5">
+    <h2 class="text-center mb-4">Naposledy pridané príspevky</h2>
+    <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action">
+            Vim: ako exitnem vim?
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Je VAII super?
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Ktorá videohra sa považuje za úplne prvú?
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Najlepšie filmy na netflixe tento mesiac?
+        </a>
+        <a href="#" class="list-group-item list-group-item-action">
+            Je multi level marketing scam?
+        </a>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-primary text-white text-center py-3">
+    <p>&copy; 2024 Ján Takáč. Všetky práva vyhradené.</p>
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#" class="text-white">Zásady ochrany osobných údajov</a></li>
+        <li class="list-inline-item"><a href="#" class="text-white">Podmienky služby</a></li>
+    </ul>
+</footer>
 </html>
+

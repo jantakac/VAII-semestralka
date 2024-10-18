@@ -2,3 +2,105 @@
     height: 50px;
     width: 50px;
 }
+
+.nav-link {
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn {
+    transition: transform 0.2s ease;
+}
+
+.btn:hover {
+    animation: enlarge 0.5s ease-in-out;
+    transform: scale(1.1);
+}
+
+@keyframes enlarge {
+    0% {
+        scale: 1;
+    }
+    100% {
+        scale: 1.1;
+    }
+
+}
+
+.container-fluid h1 {
+    animation: fadeInDown 0.5s ease-in-out;
+}
+
+.container-fluid .btn {
+    animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.list-inline-item a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.list-inline-item a:after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    left: 0;
+    bottom: -5px;
+    transition: width 0.3s ease;
+}
+
+.list-inline-item a:hover:after {
+    width: 100%;
+}
+
+.list-inline-item a:hover {
+    color: #ffdf00;
+}
+
+.card {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}

@@ -1,5 +1,5 @@
 """
-URL configuration for vaii_semestralka_django project.
+URL configuration for vaii_sem_django project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/

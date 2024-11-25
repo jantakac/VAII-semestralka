@@ -22,19 +22,42 @@
                             </div>
                         </div>
                         {% if form.errors %}
-                            <p style="color: red;">Invalid credentials</p>
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for field, errors in form.errors.items %}
+                                        {% for error in errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
                         {% endif %}
                         <form method="post">
                             {% csrf_token %}
                             <div class="row gy-3 gy-md-4 overflow-hidden">
-                                <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com" required>
+                                <!-- Render form fields -->
+                                <input type="hidden" name="csrfmiddlewaretoken" value="YOUR_CSRF_TOKEN">
+                                <!-- Username Field -->
+                                <div>
+                                    <label for="id_username" class="form-label">Meno používateľa <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="username" id="id_username" required>
                                 </div>
-                                <div class="col-12">
-                                    <label for="password" class="form-label">Heslo <span class="text-danger">*</span></label>
-                                    <input type="password" class="form-control" name="password" id="password" value="" required>
+                                <!-- Email Field -->
+                                <div>
+                                    <label for="id_email" class="form-label">E-mail <span class="text-danger">*</span></label>
+                                    <input type="email" class="form-control" name="email" id="id_email" required>
                                 </div>
+                                <!-- Password1 Field -->
+                                <div>
+                                    <label for="id_password1" class="form-label">Heslo <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password1" id="id_password1" required>
+                                </div>
+                                <!-- Password2 Field -->
+                                <div>
+                                    <label for="id_password2" class="form-label">Potrvď heslo <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" name="password2" id="id_password2" required>
+                                </div>
+                                <!-- Submit Button -->
                                 <div class="col-12">
                                     <div class="d-grid">
                                         <button class="btn bsb-btn-xl btn-primary" type="submit">Zaregistrovať sa</button>

@@ -1,0 +1,56 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}Forum{% endblock %}
+{% block home_active %}active{% endblock %}
+
+{% block content %}
+    <!-- Hlavná Sekcia -->
+    <div class="container-fluid bg-primary text-white text-center py-5">
+        <h1>Vitaj na fóre!</h1>
+        <a href="#" class="btn btn-light btn-lg">Pridaj sa!</a>
+    </div>
+
+    <!-- Hot Topics Sekcia -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Horúce Témy</h2>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">
+                Ako začať s programovaním v Pythone?
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Najnovšie trendy v umelej inteligencii
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Výhody a nevýhody práce na diaľku
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Top 5 hier roka 2024
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Aké gadgety sú teraz populárne?
+            </a>
+        </div>
+    </div>
+
+    <!-- Recent Sekcia -->
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Naposledy pridané príspevky</h2>
+        <div class="list-group">
+            <a href="#" class="list-group-item list-group-item-action">
+                Vim: ako exitnem vim?
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Je VAII super?
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Ktorá videohra sa považuje za úplne prvú?
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Najlepšie filmy na netflixe tento mesiac?
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+                Je multi level marketing scam?
+            </a>
+        </div>
+    </div>
+{% endblock %}

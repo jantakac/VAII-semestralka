@@ -2,23 +2,25 @@ from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
-from .forms import CustomUserCreationForm  # Or UserCreationForm if you're not using a custom form
+from .forms import CustomUserCreationForm, LoginForm
 
 
 def login_view(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
+    if request.method == 'POST': # ak uz submitol
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(request, username=username, password=password)
+            if user is not None and user.is_active:
+                login(request, user)
+                return redirect('forum:index')
+            else:
+                form.add_error(None, 'Invalid username or password')
+    else: # ak si este len loadol form
+        form = LoginForm()
 
-        if user is not None:
-            login(request, user)  # Log the user in
-            return redirect('forum:index')  # Redirect to the home page or dashboard
-        else:
-            # Invalid credentials
-            return render(request, 'forum/login.html', {'error': 'Invalid credentials'})
-
-    return render(request, 'forum/login.html')
+    return render(request, 'forum/login.html', {'form': form})
 
 def logout_view(request):
     logout(request)  # Log the user out
@@ -42,4 +44,3 @@ class CategoriesView(generic.TemplateView):
 
 class AboutView(generic.TemplateView):
     template_name = 'forum/about.html'
-

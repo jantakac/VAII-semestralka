@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.views import generic
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from .forms import CustomUserCreationForm, LoginForm
+from django.contrib.auth.decorators import login_required
+from .forms import CustomUserCreationForm, LoginForm, CommentForm, UserProfileForm
 from .models import Post
 
 def login_view(request):
@@ -63,3 +64,39 @@ def post_list(request):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     return render(request, 'forum/post_detail.html', {'post': post})
+
+
+@login_required
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
+            return redirect('forum:post_detail', post_id=post.id)
+    return redirect('forum:post_detail', post_id=post.id)
+
+
+@login_required
+def profile_view(request):
+    user = request.user
+    return render(request, 'forum/profile.html', {'user': user})
+
+
+@login_required
+def profile_edit_view(request):
+    user = request.user
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user)
+    return render(request, 'forum/profile_edit.html', {'form': form})
+
+def post_add_view(request):
+    return None

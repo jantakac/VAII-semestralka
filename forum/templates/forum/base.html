@@ -35,6 +35,16 @@
             {% if user.is_authenticated %}
                 <ul class="navbar-nav">
                     <li class="nav-item black-under-animation">
+                        <a class="nav-link" href="{% url 'forum:post_add' %}">Pridať príspevok</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item black-under-animation">
+                        <a class="nav-link {% block profile_active %}{% endblock %}" href="{% url 'forum:profile' %}">Profil</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item black-under-animation">
                         <a class="nav-link" href="{% url 'forum:logout' %}">Odhlásiť sa</a>
                     </li>
                 </ul>

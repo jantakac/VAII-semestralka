@@ -1,0 +1,38 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}Profil{% endblock %}
+{% block profile_active %}active{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card mb-2">
+            <div class="card-header bg-primary text-white">
+                <h2>Môj profil</h2>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="" alt="fotka_pouzivatela" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="col-md-8">
+                        <h4 class="card-title">{{ user.first_name }}  {{ user.last_name }}</h4>
+                        <p class="card-text">
+                            <strong>Používateľské meno:</strong> {{ user.username }}<br>
+                            <strong>E-mail:</strong> {{ user.email }}<br>
+                            <strong>Profil vytvorený: </strong> {{ user.date_joined }}<br>
+                            <strong>Telefónne číslo:</strong> -<br>
+                            <strong>Krajina:</strong> -<br>
+                            <strong>O mne:</strong> -
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-muted text-center">
+                Posledné prihlásenie: {{ user.last_login }}
+            </div>
+            <div class="card-footer text-center">
+                <a class="btn btn-primary btn-lg" href="{% url 'forum:profile_edit' %}" type="button">Upraviť profil</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <!-- Post Section -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <small>Vytvorené používateľom: <strong>{{ post.created_by }}</strong></small>
+            </div>
+            <div class="card-body">
+                <p>{{ post.content }}</p>
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="mt-4">
+            <h4>Komentáre</h4>
+
+            <div class="list-group">
+                {% if post.comments.exists %}
+                    {% for comment in post.comments.all %}
+                        <div class="list-group-item card">
+                            <strong>{{ comment.user }}</strong>
+                            <p>{{ comment.content }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Tento príspevok ešte nemá komentáre. Buď prvý komentujúci!</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

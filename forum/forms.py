@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Comment
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -44,3 +45,8 @@ class LoginForm(forms.Form):
         label='Heslo',
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Zadaj heslo'}),
     )
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']

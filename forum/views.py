@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.views import generic
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from .forms import CustomUserCreationForm, LoginForm
-
+from .models import Post
 
 def login_view(request):
     if request.method == 'POST': # ak uz submitol
@@ -36,11 +36,30 @@ def register_view(request):
         form = CustomUserCreationForm()
     return render(request, 'forum/register.html', {'form': form})
 
-class IndexView(generic.TemplateView):
-    template_name = 'forum/index.html'
+def index_view(request):
+    # Get the 5 most liked posts
+    most_liked_posts = Post.objects.all().order_by('-like_count')[:5]
+
+    # Get the 5 most recent posts
+    most_recent_posts = Post.objects.all().order_by('-created_at')[:5]
+
+    return render(request, 'forum/index.html', {
+        'most_liked_posts': most_liked_posts,
+        'most_recent_posts': most_recent_posts,
+    })
+
 
 class CategoriesView(generic.TemplateView):
     template_name = 'forum/categories.html'
 
 class AboutView(generic.TemplateView):
     template_name = 'forum/about.html'
+
+
+def post_list(request):
+    return None
+
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'forum/post_detail.html', {'post': post})

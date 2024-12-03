@@ -93,10 +93,21 @@ def profile_edit_view(request):
         form = UserProfileForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            return redirect('profile')
+            return redirect('forum:profile')
     else:
         form = UserProfileForm(instance=user)
     return render(request, 'forum/profile_edit.html', {'form': form})
+
+
+@login_required
+def profile_delete_view(request):
+    user = request.user
+    if request.method == 'POST':
+        logout(request)
+        user.delete()
+        return redirect('forum:index')
+    return render(request, 'forum/profile_edit.html')
+
 
 def post_add_view(request):
     return None

@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <link rel="icon" href="{% static 'forum/img/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'forum/style.css' %}">
-    <link rel="stylesheet" href="{% static 'forum/style.css' %}">
     {% block additional_stylesheets %}
     {% endblock %}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -13,7 +12,7 @@
     <title>{% block title %}Base{% endblock %}</title>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light p-3">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-3 fs-5">
         <a class="navbar-brand" href="{% url 'forum:index' %}">
             <img src="{% static 'forum/img/forumlogo.png' %}" alt="logo">
         </a>
@@ -33,11 +32,13 @@
                 </li>
             </ul>
             {% if user.is_authenticated %}
+                <!-- Zatial neimplementovane
                 <ul class="navbar-nav">
                     <li class="nav-item black-under-animation">
                         <a class="nav-link" href="{% url 'forum:post_add' %}">Pridať príspevok</a>
                     </li>
                 </ul>
+                -->
                 <ul class="navbar-nav">
                     <li class="nav-item black-under-animation">
                         <a class="nav-link {% block profile_active %}{% endblock %}" href="{% url 'forum:profile' %}">Profil</a>

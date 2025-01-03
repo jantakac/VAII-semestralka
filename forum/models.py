@@ -7,7 +7,7 @@ class Post(models.Model):
     title = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    like_count = models.IntegerField(default=0)
+    like_count = models.PositiveIntegerField(default=0)
     content = models.TextField()
     def __str__(self):
         return self.title
@@ -20,7 +20,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    like_count = models.IntegerField(default=0)
+    like_count = models.PositiveIntegerField(default=0)
     content = models.TextField()
 
     class Meta:
@@ -28,3 +28,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Komentár používateľa {self.user if self.user else 'Anonymous'} v {self.post.title}"
+
+class PostLikedbyUser(models.Model):
+    post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

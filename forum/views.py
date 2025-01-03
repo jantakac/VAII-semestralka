@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.http import HttpResponse
 from django.views import generic
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, LoginForm, CommentForm, UserProfileForm
-from .models import Post
+from .models import Post, PostLikedbyUser
+
 
 def login_view(request):
     if request.method == 'POST': # ak uz submitol
@@ -23,9 +24,11 @@ def login_view(request):
 
     return render(request, 'forum/login.html', {'form': form})
 
+
 def logout_view(request):
     logout(request)  # Log the user out
     return redirect('forum:index')
+
 
 def register_view(request):
     if request.method == 'POST':
@@ -36,6 +39,7 @@ def register_view(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'forum/register.html', {'form': form})
+
 
 def index_view(request):
     # Get the 5 most liked posts
@@ -52,6 +56,7 @@ def index_view(request):
 
 class CategoriesView(generic.TemplateView):
     template_name = 'forum/categories.html'
+
 
 class AboutView(generic.TemplateView):
     template_name = 'forum/about.html'
@@ -111,3 +116,22 @@ def profile_delete_view(request):
 
 def post_add_view(request):
     return None
+
+
+def like_post(request):
+    return None
+
+
+@login_required
+def like_post(request):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    like = PostLikedbyUser.objects.filter(post_id=post, user_id=request.user)
+    if like.exists():
+        like.delete()
+        post.like_count -= 1
+    else:
+        like = PostLikedbyUser(post_id=post.id, user_id=request.user.id)
+        like.save()
+        post.like_count += 1
+    post.save()
+    return HttpResponse(post.like_count)

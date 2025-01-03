@@ -20,3 +20,9 @@ urlpatterns = [
     path('profile/delete', views.profile_delete_view, name='profile_delete'),
 
 ]
+
+htmx_urlpatterns = [
+    path('like_post/', views.like_post, name='like_post'),
+]
+
+urlpatterns += htmx_urlpatterns

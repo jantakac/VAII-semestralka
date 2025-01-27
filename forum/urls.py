@@ -1,5 +1,6 @@
 from django.urls import path
-from django.contrib.auth.views import LoginView, LogoutView
+from django.conf import settings
+from django.conf.urls.static import static
 from forum import views
 
 app_name = 'forum'
@@ -18,7 +19,7 @@ urlpatterns = [
     path('profile/edit', views.profile_edit_view, name='profile_edit'),
     path('profile/delete', views.profile_delete_view, name='profile_delete'),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 htmx_urlpatterns = [
     path('like-post/', views.like_post, name='like_post'),

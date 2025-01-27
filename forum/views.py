@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
-from .forms import CustomUserCreationForm, LoginForm, CommentForm, UserProfileForm
-from .models import Post, PostLikedbyUser, Comment
+from .forms import CustomUserCreationForm, LoginForm, UserEditForm, ProfileEditForm
+from .models import Post, PostLikedbyUser, Profile
 
 
 def login_view(request):
@@ -36,18 +36,17 @@ def register_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()  # Save the user to the database
-            return redirect('forum:login')  # Redirect to login page
+            user = form.save()
+            Profile.objects.create(user=user)
+            return redirect('forum:login')
     else:
         form = CustomUserCreationForm()
     return render(request, 'forum/register.html', {'form': form})
 
 
 def index_view(request):
-    # Get the 5 most liked posts
     most_liked_posts = Post.objects.all().order_by('-like_count')[:5]
 
-    # Get the 5 most recent posts
     most_recent_posts = Post.objects.all().order_by('-created_at')[:5]
 
     return render(request, 'forum/index.html', {
@@ -72,6 +71,7 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     return render(request, 'forum/post_detail.html', {'post': post})
 
+
 @require_POST
 @login_required
 def add_comment(request):
@@ -85,21 +85,26 @@ def add_comment(request):
 
 @login_required
 def profile_view(request):
-    user = request.user
-    return render(request, 'forum/profile.html', {'user': user})
+    profile = request.user.profile
+    return render(request, 'forum/profile.html', {'profile': profile})
 
 
 @login_required
 def profile_edit_view(request):
     user = request.user
+    profile = user.profile
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
+        user_form = UserEditForm(request.POST, instance=user)
+        profile_form = ProfileEditForm(request.POST, request.FILES, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
             return redirect('forum:profile')
     else:
-        form = UserProfileForm(instance=user)
-    return render(request, 'forum/profile_edit.html', {'form': form})
+        user_form = UserEditForm(instance=user)
+        profile_form = ProfileEditForm(instance=profile)
+
+    return render(request, 'forum/profile_edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required

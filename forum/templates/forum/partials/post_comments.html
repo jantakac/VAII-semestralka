@@ -1,0 +1,15 @@
+<div class="mt-4">
+    <h4>Komentáre</h4>
+    <div class="list-group">
+        {% if post.comments.exists %}
+            {% for comment in post.comments.all %}
+                <div class="list-group-item card mb-2">
+                    <strong>{{ comment.user }}</strong>
+                    <p>{{ comment.content }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Tento príspevok ešte nemá komentáre. Buď prvý komentujúci!</p>
+        {% endif %}
+    </div>
+</div>

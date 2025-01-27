@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)

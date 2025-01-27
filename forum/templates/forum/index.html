@@ -29,21 +29,12 @@
     <div class="container my-5 fs-5">
         <h2 class="text-center mb-4">Naposledy pridané príspevky</h2>
         <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-                Vim: ako exitnem vim?
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                Je VAII super?
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                Ktorá videohra sa považuje za úplne prvú?
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                Najlepšie filmy na netflixe tento mesiac?
-            </a>
-            <a href="#" class="list-group-item list-group-item-action">
-                Je multi level marketing scam?
-            </a>
+            {% for post in most_recent_posts %}
+                <li class="list-group-item list-group-item-action">
+                    <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+                    <p>Počet like-ov: {{ post.like_count }}</p>
+                </li>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

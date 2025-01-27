@@ -3,8 +3,10 @@ from django.views import generic
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+
 from .forms import CustomUserCreationForm, LoginForm, CommentForm, UserProfileForm
-from .models import Post, PostLikedbyUser
+from .models import Post, PostLikedbyUser, Comment
 
 
 def login_view(request):
@@ -70,19 +72,15 @@ def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     return render(request, 'forum/post_detail.html', {'post': post})
 
-
+@require_POST
 @login_required
-def add_comment(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = post
-            comment.user = request.user
-            comment.save()
-            return redirect('forum:post_detail', post_id=post.id)
-    return redirect('forum:post_detail', post_id=post.id)
+def add_comment(request):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    content = request.POST.get('content')
+    if content:
+        comment = post.comments.create(content=content, user_id=request.user.id, post_id=post.id)
+        post.comments.add(comment)
+        return render(request, 'forum/partials/post_comments.html', {'post': post})
 
 
 @login_required

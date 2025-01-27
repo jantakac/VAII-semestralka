@@ -21,7 +21,7 @@
                 <!-- Like button -->
                 <button type="button" class="btn btn-danger ms-1"
                         hx-trigger="click"
-                        hx-post="/like_post/"
+                        hx-post="{% url 'forum:like_post' %}"
                         hx-target="#like-count"
                         hx-vals='{"post_id" : {{ post.id }}}'
                         hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
@@ -56,29 +56,22 @@
         </div>
         <!-- Reply Form (Najskor skryta) -->
         <div class="mt-4">
-            <form id="reply-form" method="post" action="{% url 'forum:add_comment' post.id %}" style="display: none;">
-                {% csrf_token %}
+            <form id="reply-form" style="display: none;">
                 <label>
                     <textarea class="form-control" name="content" rows="3" cols="10000" placeholder="Napíš svoju odpoveď sem..." required></textarea>
                 </label>
-                <button type="submit" class="btn btn-success mt-2 ms-1">Odoslať</button>
+                <button type="submit" class="btn btn-success mt-2 ms-1"
+                        hx-post="{% url 'forum:add_comment' %}"
+                        hx-target="#post-comments"
+                        hx-vals='{"post_id" : {{ post.id }}}'
+                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                            Odoslať
+                </button>
             </form>
         </div>
         <!-- Komentare -->
-        <div class="mt-4">
-            <h4>Komentáre</h4>
-            <div class="list-group">
-                {% if post.comments.exists %}
-                    {% for comment in post.comments.all %}
-                        <div class="list-group-item card mb-2">
-                            <strong>{{ comment.user }}</strong>
-                            <p>{{ comment.content }}</p>
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>Tento príspevok ešte nemá komentáre. Buď prvý komentujúci!</p>
-                {% endif %}
-            </div>
+        <div id="post-comments">
+            {% include 'forum/partials/post_comments.html' %}
         </div>
     </div>
 

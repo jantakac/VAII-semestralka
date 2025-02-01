@@ -4,7 +4,7 @@ from django.urls import reverse
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     image = models.ImageField(default='pf_pics/default.png', upload_to='pf_pics', null=False, blank=True)
     country = models.CharField(max_length=50, null=True, blank=True)
     bio = models.TextField(max_length=150, null=True, blank=True)
@@ -18,6 +18,8 @@ class Post(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     like_count = models.PositiveIntegerField(default=0)
     content = models.TextField()
+    category = models.CharField(max_length=50, default='other', null=False, blank=True)
+    icon = models.ImageField(upload_to='post_pics', null=True, blank=True)
     def __str__(self):
         return self.title
 
@@ -42,3 +44,9 @@ class Comment(models.Model):
 class PostLikedbyUser(models.Model):
     post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class PostImages(models.Model):
+    post = models.ForeignKey(Post, related_name='images', on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='post_pics', blank=True, null=True)
+

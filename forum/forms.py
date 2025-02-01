@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Comment, Profile
+from .models import Comment, Profile, Post, PostImages
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -63,3 +63,12 @@ class ProfileEditForm(forms.ModelForm):
         model = Profile
         fields = ['image', 'country', 'bio']
 
+class PostAddPostSideForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content', 'category', 'icon']
+
+class PostAddImageSideForm(forms.ModelForm):
+    class Meta:
+        model = PostImages
+        fields = ['image']

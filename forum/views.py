@@ -5,8 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
-from .forms import CustomUserCreationForm, LoginForm, UserEditForm, ProfileEditForm
-from .models import Post, PostLikedbyUser, Profile
+from .forms import CustomUserCreationForm, LoginForm, UserEditForm, ProfileEditForm, PostAddPostSideForm, PostAddImageSideForm
+from .models import Post, PostLikedbyUser, Profile, PostImages
 
 
 def login_view(request):
@@ -46,12 +46,16 @@ def register_view(request):
 
 def index_view(request):
     most_liked_posts = Post.objects.all().order_by('-like_count')[:5]
+    most_liked_profiles = [Profile.objects.get(user_id=post.created_by_id) for post in most_liked_posts]
+    most_liked_tuples = list(zip(most_liked_posts, most_liked_profiles))
 
     most_recent_posts = Post.objects.all().order_by('-created_at')[:5]
+    most_recent_profiles = [Profile.objects.get(user_id=post.created_by_id) for post in most_recent_posts]
+    most_recent_tuples = list(zip(most_recent_posts, most_recent_profiles))
 
     return render(request, 'forum/index.html', {
-        'most_liked_posts': most_liked_posts,
-        'most_recent_posts': most_recent_posts,
+        'most_liked_tuples': most_liked_tuples,
+        'most_recent_tuples': most_recent_tuples,
     })
 
 
@@ -69,7 +73,8 @@ def post_list(request):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    return render(request, 'forum/post_detail.html', {'post': post})
+    images = post.images.all()
+    return render(request, 'forum/post_detail.html', {'post': post, 'images': images})
 
 
 @require_POST
@@ -117,12 +122,24 @@ def profile_delete_view(request):
     return render(request, 'forum/profile_edit.html')
 
 
+@login_required
 def post_add_view(request):
-    return None
+    if request.method == 'POST':
+        form_post = PostAddPostSideForm(request.POST, request.FILES)
+        form_images = PostAddImageSideForm(request.FILES)
+        if form_post.is_valid() and form_images.is_valid():
+            post = form_post.save(commit=False)
+            post.created_by = request.user
+            post.save()
+            images = request.FILES.getlist('image')
+            for image in images:
+                PostImages.objects.create(post_id=post.id, image=image)
 
-
-def like_post(request):
-    return None
+            return redirect('forum:index')
+    else:
+        form_post = PostAddPostSideForm()
+        form_images = PostAddImageSideForm()
+    return render(request, 'forum/post_add.html', {'form_post': form_post, 'form_images': form_images})
 
 
 @login_required

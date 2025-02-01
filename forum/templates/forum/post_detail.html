@@ -13,6 +13,9 @@
             <div class="card-body">
                 <p>{{ post.content }}</p>
             </div>
+            {% for image in images %}
+                <img src="{{ image.image.url }}" alt="post-image">
+            {% endfor %}
         </div>
 
         <!-- Reply Button aj Form -->

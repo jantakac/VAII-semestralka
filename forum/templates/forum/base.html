@@ -35,15 +35,14 @@
                 <li class="nav-item black-under-animation">
                     <a class="nav-link {% block about_active %}{% endblock %}" href="{% url 'forum:about' %}">O projekte</a>
                 </li>
+
             </ul>
             {% if user.is_authenticated %}
-                <!-- Zatial neimplementovane
                 <ul class="navbar-nav">
                     <li class="nav-item black-under-animation">
-                        <a class="nav-link" href="{% url 'forum:post_add' %}">Pridať príspevok</a>
+                        <a class="nav-link {% block post_add_active %}{% endblock %}" href="{% url 'forum:post_add' %}">Pridať príspevok</a>
                     </li>
                 </ul>
-                -->
                 <ul class="navbar-nav">
                     <li class="nav-item black-under-animation">
                         <a class="nav-link {% block profile_active %}{% endblock %}" href="{% url 'forum:profile' %}">Profil</a>
@@ -55,6 +54,11 @@
                     </li>
                 </ul>
             {% else %}
+                <ul class="navbar-nav">
+                    <li class="nav-item black-under-animation">
+                        <a class="nav-link" href="{% url 'forum:login' %}">Pridať príspevok</a>
+                    </li>
+                </ul>
                 <ul class="navbar-nav">
                     <li class="nav-item black-under-animation">
                         <a class="nav-link {% block login_active %}{% endblock %}" href="{% url 'forum:login' %}">Prihlásenie</a>

@@ -64,6 +64,7 @@
                     <textarea class="form-control" name="content" rows="3" cols="10000" placeholder="Napíš svoju odpoveď sem..." required></textarea>
                 </label>
                 <button type="submit" class="btn btn-success mt-2 ms-1"
+                        hx-trigger="click"
                         hx-post="{% url 'forum:add_comment' %}"
                         hx-target="#post-comments"
                         hx-vals='{"post_id" : {{ post.id }}}'

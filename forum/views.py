@@ -142,6 +142,7 @@ def post_add_view(request):
     return render(request, 'forum/post_add.html', {'form_post': form_post, 'form_images': form_images})
 
 
+@require_POST
 @login_required
 def like_post(request):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
@@ -155,3 +156,12 @@ def like_post(request):
         post.like_count += 1
     post.save()
     return HttpResponse(post.like_count)
+
+
+@require_POST
+def filter_categories(request):
+    category = request.POST.get('category')
+    posts = Post.objects.filter(category=category)
+    profiles = [Profile.objects.get(user_id=post.created_by_id) for post in posts]
+    posts_profiles = list(zip(posts, profiles))
+    return render(request, 'forum/partials/filtered_posts_list.html', {'title': 'Vyfiltrované posty', 'posts_profiles': posts_profiles})

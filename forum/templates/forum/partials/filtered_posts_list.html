@@ -1,0 +1,38 @@
+<div class="mt-4">
+    <h2 class="text-center mb-4">{{ title }}</h2>
+    <div class="list-group">
+        {% if posts_profiles %}
+            {% for post, profile in posts_profiles %}
+                <li class="list-group-item list-group-item-action position-relative">
+                    {% if post.icon %}
+                        <img src="{{ post.icon.url }}"
+                             width="70"
+                             height="70"
+                             alt="post_icon"
+                             class="position-absolute"
+                             style="bottom: 10px; left: 10px;">
+                        <div style="padding-left: 75px">
+                            <a href="{{ post.get_absolute_url }}" class="text-decoration-none">{{ post.title }}</a>
+                            <p class="">Počet like-ov: {{ post.like_count }}</p>
+                        </div>
+                    {% else %}
+                        <a href="{{ post.get_absolute_url }}" class="text-decoration-none">{{ post.title }}</a>
+                        <p class="">Počet like-ov: {{ post.like_count }}</p>
+                    {% endif %}
+                    <img src="{{ profile.image.url }}"
+                         width="50"
+                         height="50"
+                         alt="last_created_by"
+                         class="position-absolute"
+                         style="bottom: 10px; right: 10px;">
+                    <p class="position-absolute"
+                         style="bottom: 0; right: 70px;">
+                        {{ profile.user.username }}
+                    </p>
+                </li>
+            {% endfor %}
+        {% else %}
+            <p>Žiaden príspevok nespadá do vybratej kategórie</p>
+        {% endif %}
+    </div>
+</div>

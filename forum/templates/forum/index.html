@@ -16,9 +16,6 @@
 
     <div class="container my-5 fs-5">
         {% include 'forum/partials/filtered_posts_list.html' with title="Horúce Témy" posts_profiles=most_liked_tuples%}
-    </div>
-
-    <div class="container my-5 fs-5">
         {% include 'forum/partials/filtered_posts_list.html' with title="Naposledy pridané príspevky" posts_profiles=most_recent_tuples %}
     </div>
 {% endblock %}

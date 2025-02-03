@@ -1,0 +1,14 @@
+<div class="col-md-2">
+    <div class="card mb-2">
+        <div class="card-header bg-primary text-white">
+            <h5>{{ profile.user.username }}</h5>
+        </div>
+        <div class="card-body">
+            <img class="browse-profiles-imgs" src="{{ profile.image.url }}" alt="profile-image"/>
+
+        </div>
+        <div class="card-footer text-center">
+            <a class="btn btn-primary btn" href="{{ profile.get_absolute_url }}" type="button">Zobraziť profil</a>
+        </div>
+    </div>
+</div>

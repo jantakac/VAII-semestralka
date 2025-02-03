@@ -165,3 +165,13 @@ def filter_categories(request):
     profiles = [Profile.objects.get(user_id=post.created_by_id) for post in posts]
     posts_profiles = list(zip(posts, profiles))
     return render(request, 'forum/partials/filtered_posts_list.html', {'title': 'Vyfiltrované posty', 'posts_profiles': posts_profiles})
+
+
+def browse_profiles_view(request):
+    profiles = Profile.objects.all()
+    return render(request, 'forum/browse_profiles.html', {'profiles': profiles})
+
+
+def browse_profile_view(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    return render(request, 'forum/browse_profile.html', {'profile': profile})

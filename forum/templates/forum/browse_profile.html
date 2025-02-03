@@ -1,0 +1,38 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}Používatelia{% endblock %}
+{% block users_active %}active{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card mb-2">
+        <div class="card-header bg-primary text-white">
+            <h2>Profil používateľa {{ profile.user.username }}</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{ profile.image.url }}" width="200" height="200" alt="pf_picture">
+                </div>
+                <div class="col-md-8">
+                    <h4 class="card-title">{{ profile.user.first_name }}  {{ profile.user.last_name }}</h4>
+                    <p class="card-text">
+                        <strong>Používateľské meno:</strong> {{ profile.user.username }}<br>
+                        <strong>E-mail:</strong> {{ profile.user.email }}<br>
+                        <strong>Profil vytvorený: </strong> {{ profile.user.date_joined }}<br>
+                        <strong>Krajina: </strong> {{ profile.country }}<br>
+                        <strong>Bio: </strong> {{ profile.bio }}
+                    </p>
+                </div>
+            </div>
+            <!-- Follow Button -->
+            <button class="btn btn-primary btn-sm" style="position: absolute; bottom: 5rem; right: 5rem;">
+                Follow
+            </button>
+        </div>
+        <div class="card-footer text-muted text-center">
+            Posledné prihlásenie: {{ profile.user.last_login }}
+        </div>
+    </div>
+</div>
+{% endblock %}

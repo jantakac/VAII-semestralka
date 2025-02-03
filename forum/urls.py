@@ -11,13 +11,14 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),
-    #path('success/', lambda request: path.render(request, 'success.html'), name='success'),
     path('posts/', views.post_list, name='post_list'),
     path('posts/<int:post_id>/', views.post_detail, name='post_detail'),
     path('posts/add', views.post_add_view, name='post_add'),
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit', views.profile_edit_view, name='profile_edit'),
     path('profile/delete', views.profile_delete_view, name='profile_delete'),
+    path('browse-profiles/', views.browse_profiles_view, name='browse_profiles'),
+    path('browse-profiles/<int:profile_id>/', views.browse_profile_view, name='browse_profile'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -4,7 +4,7 @@
 {% block categories_active %}active{% endblock %}
 
 {% block content %}
-<!-- Kategórie Section with Tiles -->
+
 <div class="container my-5">
     <h2 class="text-center mb-4">Kategórie</h2>
     <div class="row">
@@ -15,7 +15,7 @@
     <div class="row">
         {% include 'forum/partials/category_card.html' with title="Umelá inteligencia" db_category_name="ai" bg="bg-danger"%}
         {% include 'forum/partials/category_card.html' with title="Gadgety" db_category_name="gadgets" bg="bg-info" %}
-        {% include 'forum/partials/category_card.html' with title="Filmy" db_category_name="movies" bg="bg-secondary" %}
+        {% include 'forum/partials/category_card.html' with title="Filmy/Seriály" db_category_name="tv" bg="bg-secondary" %}
     </div>
     <div class="row">
         {% include 'forum/partials/category_card.html' with title="Ostatné" db_category_name="other" bg="bg-primary" %}

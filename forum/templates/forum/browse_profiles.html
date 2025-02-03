@@ -1,0 +1,14 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}Používatelia{% endblock %}
+{% block users_active %}active{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row mx-3 mt-3">
+        {% for profile in profiles %}
+            {% include 'forum/partials/browse_profile_card.html' with profile=profile %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -6,27 +6,24 @@
                 <li class="list-group-item list-group-item-action position-relative">
                     {% if post.icon %}
                         <img src="{{ post.icon.url }}"
-                             width="70"
-                             height="70"
+                             width="65"
+                             height="65"
                              alt="post_icon"
-                             class="position-absolute"
-                             style="bottom: 10px; left: 10px;">
-                        <div style="padding-left: 75px">
+                             class="partial-li-post-icon-position">
+                        <div class="partial-li-post-content-padding">
                             <a href="{{ post.get_absolute_url }}" class="text-decoration-none">{{ post.title }}</a>
-                            <p class="">Počet like-ov: {{ post.like_count }}</p>
+                            <p class="mb-1">Počet like-ov: {{ post.like_count }}</p>
                         </div>
                     {% else %}
                         <a href="{{ post.get_absolute_url }}" class="text-decoration-none">{{ post.title }}</a>
-                        <p class="">Počet like-ov: {{ post.like_count }}</p>
+                        <p class="mb-1">Počet like-ov: {{ post.like_count }}</p>
                     {% endif %}
                     <img src="{{ profile.image.url }}"
                          width="50"
                          height="50"
                          alt="last_created_by"
-                         class="position-absolute"
-                         style="bottom: 10px; right: 10px;">
-                    <p class="position-absolute"
-                         style="bottom: 0; right: 70px;">
+                         class="partial-li-user-image-position">
+                    <p class="partial-li-username-position">
                         {{ profile.user.username }}
                     </p>
                 </li>

@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="card-footer text-muted text-center">
-                Posledné prihlásenie: {{ profile.last_login }}
+                Posledné prihlásenie: {{ profile.user.last_login }}
             </div>
             <div class="card-footer text-center">
                 <a class="btn btn-primary btn-lg" href="{% url 'forum:profile_edit' %}" type="button">Upraviť profil</a>

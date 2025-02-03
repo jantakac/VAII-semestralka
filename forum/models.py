@@ -11,6 +11,9 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user.__str__())
 
+    def get_absolute_url(self):
+        return reverse('forum:browse_profile', args=[str(self.id)])
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)

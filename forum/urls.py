@@ -14,6 +14,7 @@ urlpatterns = [
     path('posts/', views.post_list, name='post_list'),
     path('posts/<int:post_id>/', views.post_detail, name='post_detail'),
     path('posts/add', views.post_add_view, name='post_add'),
+    path('my-posts/', views.my_posts_view, name='my_posts'),
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit', views.profile_edit_view, name='profile_edit'),
     path('profile/delete', views.profile_delete_view, name='profile_delete'),
@@ -27,7 +28,8 @@ htmx_urlpatterns = [
     path('add-comment/', views.add_comment, name='add_comment'),
     path('edit-comment/', views.edit_comment, name='edit_comment'),
     path('delete-comment/', views.delete_comment, name='delete_comment'),
-    path('filter-categories/', views.filter_categories, name='filter_categories'),
+    path('categories/filter/', views.filter_categories, name='filter_categories'),
+    path('my-posts/sort/', views.sort_my_posts_view, name='sort_my_posts'),
 ]
 
 urlpatterns += htmx_urlpatterns

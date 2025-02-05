@@ -187,9 +187,8 @@ def like_post(request):
     return HttpResponse(post.like_count)
 
 
-@require_POST
 def filter_categories(request):
-    category = request.POST.get('category')
+    category = request.GET.get('category')
     posts = Post.objects.filter(category=category)
     profiles = [Profile.objects.get(user_id=post.created_by_id) for post in posts]
     posts_profiles = list(zip(posts, profiles))
@@ -205,3 +204,21 @@ def browse_profile_view(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     return render(request, 'forum/browse_profile.html', {'profile': profile})
 
+
+@login_required
+def my_posts_view(request):
+    posts = Post.objects.filter(created_by_id=request.user.id)
+    return render(request, 'forum/my_posts.html', {'posts': posts})
+
+
+@login_required
+def sort_my_posts_view(request):
+    sort_by = request.GET.get('sort_by')
+
+    if sort_by == "descending_date":
+        sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('-created_at')
+    elif sort_by == "ascending_date":
+        sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('created_at')
+    else:
+        sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('-like_count')
+    return render(request, 'forum/partials/my_posts_list.html', {'posts': sorted_posts})

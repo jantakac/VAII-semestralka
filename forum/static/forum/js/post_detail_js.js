@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
             editModalInput.value = button.dataset.commentContent;
             commentId = button.dataset.idComment;
         });
-    })
+    });
 
     closeBtn.addEventListener("click", () => {
         editModal.classList.remove("show");

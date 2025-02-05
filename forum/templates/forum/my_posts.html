@@ -1,0 +1,34 @@
+{% extends 'forum/base.html' %}
+
+{% block title %}Moje príspevky{% endblock %}
+{% block my_posts_active %}active{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center mt-4">
+    <div class="dropdown">
+        <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Zoradiť podľa
+        </button>
+        <ul class="dropdown-menu">
+            <li><button type="button" class="dropdown-item"
+                    hx-trigger="click"
+                    hx-get="{% url 'forum:sort_my_posts' %}?sort_by=like_count"
+                    hx-target="#my-posts-list"
+                    hx-push-url="true">Od najviac like-ov</button></li>
+            <li><button type="button" class="dropdown-item"
+                    hx-trigger="click"
+                    hx-get="{% url 'forum:sort_my_posts' %}?sort_by=descending_date"
+                    hx-target="#my-posts-list"
+                    hx-push-url="true">Od najnovšieho</button></li>
+            <li><button type="button" class="dropdown-item"
+                    hx-trigger="click"
+                    hx-get="{% url 'forum:sort_my_posts' %}?sort_by=ascending_date"
+                    hx-target="#my-posts-list"
+                    hx-push-url="true">Od najstaršieho</button></li>
+        </ul>
+    </div>
+</div>
+<div id="my-posts-list">
+    {% include 'forum/partials/my_posts_list.html' with posts_profiles=posts_profiles %}
+</div>
+{% endblock %}

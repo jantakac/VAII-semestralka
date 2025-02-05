@@ -2,12 +2,11 @@
     <div class="card {{ bg }} text-white mb-4">
         <div class="card-body text-center">
             <h5 class="card-title">{{ title }}</h5>
-            <button type="submit" class="btn btn-light"
+            <button class="btn btn-light"
                 hx-trigger="click"
-                hx-post="{% url 'forum:filter_categories' %}"
+                hx-get="{% url 'forum:filter_categories' %}?category={{ db_category_name|urlencode }}"
                 hx-target="#post-list"
-                hx-vals='{"category": "{{ db_category_name }}"}'
-                hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>Zobraziť</button>
+                hx-push-url="true">Zobraziť</button>
         </div>
     </div>
 </div>

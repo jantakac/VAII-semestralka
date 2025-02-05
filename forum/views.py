@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.views import generic
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 from .forms import CustomUserCreationForm, LoginForm, UserEditForm, ProfileEditForm, PostAddPostSideForm, PostAddImageSideForm
-from .models import Post, PostLikedbyUser, Profile, PostImages
+from .models import Post, PostLikedbyUser, Profile, PostImages, Comment
 
 
 def login_view(request):
@@ -86,6 +86,35 @@ def add_comment(request):
         comment = post.comments.create(content=content, user_id=request.user.id, post_id=post.id)
         post.comments.add(comment)
         return render(request, 'forum/partials/post_comments.html', {'post': post})
+
+
+@require_POST
+@login_required
+def edit_comment(request):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+    new_content = request.POST.get('content')
+
+    if comment.user_id != request.user.id:
+        return HttpResponseForbidden()
+
+    if comment.content is not None:
+        post = comment.post
+        comment.content = "[Edited] " + new_content
+        comment.save()
+        return render(request, 'forum/partials/post_comments.html', {'post': post})
+
+@require_POST
+@login_required
+def delete_comment(request):
+    comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
+
+    if comment.user_id != request.user.id:
+        return HttpResponseForbidden()
+
+    post = comment.post
+    comment.delete()
+    return render(request, 'forum/partials/post_comments.html', {'post': post})
+
 
 
 @login_required
@@ -175,3 +204,4 @@ def browse_profiles_view(request):
 def browse_profile_view(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)
     return render(request, 'forum/browse_profile.html', {'profile': profile})
+

@@ -4,34 +4,34 @@
 {% block profile_active %}active{% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <div class="card mb-2">
-            <div class="card-header bg-primary text-white">
-                <h2>Môj profil</h2>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-2">
-                        <img src="{{ profile.image.url }}" width="200" height="200" alt="pf_picture">
-                    </div>
-                    <div class="col-md-8">
-                        <h4 class="card-title">{{ profile.user.first_name }}  {{ profile.user.last_name }}</h4>
-                        <p class="card-text">
-                            <strong>Používateľské meno:</strong> {{ profile.user.username }}<br>
-                            <strong>E-mail:</strong> {{ profile.user.email }}<br>
-                            <strong>Profil vytvorený: </strong> {{ profile.user.date_joined }}<br>
-                            <strong>Krajina: </strong> {{ profile.country }}<br>
-                            <strong>Bio: </strong> {{ profile.bio }}
-                        </p>
-                    </div>
+<div class="container mt-5">
+    <div class="card mb-2">
+        <div class="card-header bg-primary text-white">
+            <h2>Môj profil</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <img src="{{ profile.image.url }}" width="200" height="200" alt="pf_picture">
+                </div>
+                <div class="col-md-8">
+                    <h4 class="card-title">{{ profile.user.first_name }}  {{ profile.user.last_name }}</h4>
+                    <p class="card-text">
+                        <strong>Používateľské meno:</strong> {{ profile.user.username }}<br>
+                        <strong>E-mail:</strong> {{ profile.user.email }}<br>
+                        <strong>Profil vytvorený: </strong> {{ profile.user.date_joined }}<br>
+                        <strong>Krajina: </strong> {{ profile.country }}<br>
+                        <strong>Bio: </strong> {{ profile.bio }}
+                    </p>
                 </div>
             </div>
-            <div class="card-footer text-muted text-center">
-                Posledné prihlásenie: {{ profile.user.last_login }}
-            </div>
-            <div class="card-footer text-center">
-                <a class="btn btn-primary btn-lg" href="{% url 'forum:profile_edit' %}" type="button">Upraviť profil</a>
-            </div>
+        </div>
+        <div class="card-footer text-muted text-center">
+            Posledné prihlásenie: {{ profile.user.last_login }}
+        </div>
+        <div class="card-footer text-center">
+            <a class="btn btn-primary btn-lg" href="{% url 'forum:profile_edit' %}" type="button">Upraviť profil</a>
         </div>
     </div>
+</div>
 {% endblock %}

@@ -25,6 +25,8 @@ urlpatterns = [
 htmx_urlpatterns = [
     path('like-post/', views.like_post, name='like_post'),
     path('add-comment/', views.add_comment, name='add_comment'),
+    path('edit-comment/', views.edit_comment, name='edit_comment'),
+    path('delete-comment/', views.delete_comment, name='delete_comment'),
     path('filter-categories/', views.filter_categories, name='filter_categories'),
 ]
 

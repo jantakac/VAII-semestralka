@@ -112,6 +112,18 @@
     right: 0.75rem;
 }
 
+.partial-li-top-right-position {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+}
+
+.partial-li-comment-edit-button {
+    position: absolute;
+    top: 0.75rem;
+    right: 4rem;
+}
+
 .partial-li-username-position {
     position: absolute;
     bottom: 0;
@@ -129,3 +141,42 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+
+
+/* css modal start */
+
+.edit-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    max-width: 500px;
+    width: 80%;
+}
+
+.btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.show {
+    display: flex;
+}
+
+/* css modal end */

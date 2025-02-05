@@ -1,96 +1,107 @@
 {% extends 'forum/base.html' %}
+{% load static %}
 
 {% block title %}{{ post.title }}{% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <!-- Post hore -->
-        <div class="card">
-            <div class="card-header">
-                <h2 class="card-title">{{ post.title }}</h2>
-                <small>Vytvorené používateľom: <strong>{{ post.created_by }}</strong></small>
-            </div>
-            <div class="card-body">
-                <p>{{ post.content }}</p>
-            </div>
+<div class="container mt-5">
+    <!-- Post hore -->
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">{{ post.title }}</h2>
+            <small>Vytvorené používateľom: <strong>{{ post.created_by }}</strong></small>
+        </div>
+        <div class="card-body">
+            <p>{{ post.content }}</p>
+        </div>
+        <div class="row g-3 p-3">
             {% for image in images %}
-                <img src="{{ image.image.url }}" alt="post-image">
+                <div class="col-md-4 col-sm-6">
+                    <img src="{{ image.image.url }}" alt="post-image" class="img-fluid w-100 h-auto rounded">
+                </div>
             {% endfor %}
-        </div>
-
-        <!-- Reply Button aj Form -->
-        <div class="mt-4 d-flex justify-content-between align-items-center">
-            {% if user.is_authenticated %}
-                <!-- Like button -->
-                <button type="button" class="btn btn-danger ms-1"
-                        hx-trigger="click"
-                        hx-post="{% url 'forum:like_post' %}"
-                        hx-target="#like-count"
-                        hx-vals='{"post_id" : {{ post.id }}}'
-                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"></path>
-                    </svg>
-                    <span id="like-count">{{ post.like_count }}</span>
-                </button>
-                <!-- Reply button -->
-                <button type="button" id="reply-btn" class="btn btn-primary ms-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
-                        <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.7 8.7 0 0 0-1.921-.306 7 7 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254l-.042-.028a.147.147 0 0 1 0-.252l.042-.028zM7.8 10.386q.103 0 .223.006c.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96z"></path>
-                    </svg>
-                    Odpovedať
-                </button>
-            {% else %}
-                <!-- Like button -->
-                <a href="{% url 'forum:login' %}" class="btn btn-danger ms-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"></path>
-                    </svg>
-                    {{ post.like_count }}
-                </a>
-                <!-- Reply button -->
-                <a href="{% url 'forum:login' %}" class="btn btn-primary ms-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
-                        <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.7 8.7 0 0 0-1.921-.306 7 7 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254l-.042-.028a.147.147 0 0 1 0-.252l.042-.028zM7.8 10.386q.103 0 .223.006c.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96z"></path>
-                    </svg>
-                    Odpovedať
-                </a>
-            {% endif %}
-        </div>
-        <!-- Reply Form (Najskor skryta) -->
-        <div class="mt-4">
-            <form id="reply-form" style="display: none;">
-                <label>
-                    <textarea class="form-control" name="content" rows="3" cols="10000" placeholder="Napíš svoju odpoveď sem..." required></textarea>
-                </label>
-                <button type="submit" class="btn btn-success mt-2 ms-1"
-                        hx-trigger="click"
-                        hx-post="{% url 'forum:add_comment' %}"
-                        hx-target="#post-comments"
-                        hx-vals='{"post_id" : {{ post.id }}}'
-                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-                            Odoslať
-                </button>
-            </form>
-        </div>
-        <!-- Komentare -->
-        <div id="post-comments">
-            {% include 'forum/partials/post_comments.html' %}
         </div>
     </div>
 
-    <!-- JS ktory zobrazuje form, django ifmi je zabezpecene aby sa ukazal iba ked je user prihlaseny,
-        taktiez je zabezpecene aby aj ked sa user dostane do otvorenej form ako neprihlaseny, tak po stlaceni
-        submitu sa vo view dekoracnou anotaciou zabezpeci ze ak neni prihlaseny tak bude presmerovany na login
-        ktory je uvedeny v settings.py-->
-    <script>
-        document.getElementById('reply-btn').addEventListener('click', function() {
-            const replyForm = document.getElementById('reply-form');
-            if (replyForm.style.display === 'none' || replyForm.style.display === '') {
-                replyForm.style.display = 'block';
-            } else {
-                replyForm.style.display = 'none';
-            }
-        });
-    </script>
+    <!-- Reply Button aj Form -->
+    <div class="mt-4 d-flex justify-content-between align-items-center">
+        {% if user.is_authenticated %}
+            <!-- Like button -->
+            <button type="button" class="btn btn-danger ms-1"
+                    hx-trigger="click"
+                    hx-post="{% url 'forum:like_post' %}"
+                    hx-target="#like-count"
+                    hx-vals='{"post_id" : {{ post.id }}}'
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"></path>
+                </svg>
+                <span id="like-count">{{ post.like_count }}</span>
+            </button>
+            <!-- Reply button -->
+            <button type="button" id="reply-btn" class="btn btn-primary ms-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
+                    <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.7 8.7 0 0 0-1.921-.306 7 7 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254l-.042-.028a.147.147 0 0 1 0-.252l.042-.028zM7.8 10.386q.103 0 .223.006c.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96z"></path>
+                </svg>
+                Odpovedať
+            </button>
+        {% else %}
+            <!-- Like button -->
+            <a href="{% url 'forum:login' %}" class="btn btn-danger ms-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"></path>
+                </svg>
+                {{ post.like_count }}
+            </a>
+            <!-- Reply button -->
+            <a href="{% url 'forum:login' %}" class="btn btn-primary ms-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-reply" viewBox="0 0 16 16">
+                    <path d="M6.598 5.013a.144.144 0 0 1 .202.134V6.3a.5.5 0 0 0 .5.5c.667 0 2.013.005 3.3.822.984.624 1.99 1.76 2.595 3.876-1.02-.983-2.185-1.516-3.205-1.799a8.7 8.7 0 0 0-1.921-.306 7 7 0 0 0-.798.008h-.013l-.005.001h-.001L7.3 9.9l-.05-.498a.5.5 0 0 0-.45.498v1.153c0 .108-.11.176-.202.134L2.614 8.254l-.042-.028a.147.147 0 0 1 0-.252l.042-.028zM7.8 10.386q.103 0 .223.006c.434.02 1.034.086 1.7.271 1.326.368 2.896 1.202 3.94 3.08a.5.5 0 0 0 .933-.305c-.464-3.71-1.886-5.662-3.46-6.66-1.245-.79-2.527-.942-3.336-.971v-.66a1.144 1.144 0 0 0-1.767-.96l-3.994 2.94a1.147 1.147 0 0 0 0 1.946l3.994 2.94a1.144 1.144 0 0 0 1.767-.96z"></path>
+                </svg>
+                Odpovedať
+            </a>
+        {% endif %}
+    </div>
+    <!-- Reply Form (Najskor skryta) -->
+    <div class="mt-4">
+        <form id="reply-form" style="display: none;">
+            <label>
+                <textarea class="form-control" name="content" rows="3" cols="10000" placeholder="Napíš svoju odpoveď sem..." required></textarea>
+            </label>
+            <button type="submit" class="btn btn-success mt-2 ms-1"
+                    hx-trigger="click"
+                    hx-post="{% url 'forum:add_comment' %}"
+                    hx-target="#post-comments"
+                    hx-vals='{"post_id" : {{ post.id }}}'
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                        Odoslať
+            </button>
+        </form>
+    </div>
+    <!-- Komentare -->
+    {% include 'forum/partials/post_comments.html' %}
+
+    <!-- modal pre edit koment -->
+    <div class="edit-modal" id="id-edit-modal">
+        <div class="edit-modal-content">
+            <h5>Edit komentára</h5>
+            <span class="btn-close" id="id-btn-close-modal"></span>
+            <div class="input-group">
+                <label>
+                    <textarea cols="40" id="id-edit-modal-input" class="form-control"></textarea>
+                    <!-- hx-vals je z javascriptu -->
+                    <button id="id-btn-save-edit-modal" type="submit" class="mt-2 btn btn-info btn-sm"
+                            hx-trigger="click"
+                            hx-post="{% url 'forum:edit_comment' %}"
+                            hx-target="#post-comments"
+                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                        Ulož
+                    </button>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'forum/js/post_detail_js.js' %}"></script>
 {% endblock %}

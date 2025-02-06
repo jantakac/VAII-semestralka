@@ -30,5 +30,6 @@ môže svoje údaje zmeniť a uložiť ich, ale môže aj svoj profil vymazať.
 
 ## Spustenie
 Spustenie stránky je pomocou príkazu:
+```
 python manage.py runserver
-
+```

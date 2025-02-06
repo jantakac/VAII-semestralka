@@ -4,18 +4,18 @@
 {% block home_active %}active{% endblock %}
 
 {% block content %}
-    <div class="container-fluid bg-primary text-white text-center py-5">
-        {% if user.is_authenticated %}
-            <h1>Vitaj späť {{ user.username }}!</h1>
-        {% else %}
-            <h1>Vitaj na fóre!</h1>
-            <a href="{% url 'forum:register' %}" class="btn btn-light btn-lg">Pridaj sa!</a>
-        {% endif %}
-    </div>
+<div class="container-fluid bg-primary text-white text-center py-5">
+    {% if user.is_authenticated %}
+        <h1>Vitaj späť {{ user.username }}!</h1>
+    {% else %}
+        <h1>Vitaj na fóre!</h1>
+        <a href="{% url 'forum:register' %}" class="btn btn-light btn-lg">Pridaj sa!</a>
+    {% endif %}
+</div>
 
 
-    <div class="container">
-        {% include 'forum/partials/filtered_posts_list.html' with title="Horúce Témy" posts_profiles=most_liked_tuples%}
-        {% include 'forum/partials/filtered_posts_list.html' with title="Naposledy pridané príspevky" posts_profiles=most_recent_tuples %}
-    </div>
+<div class="container">
+    {% include 'forum/partials/filtered_posts_list.html' with title="Horúce Témy" posts_profiles=most_liked_tuples%}
+    {% include 'forum/partials/filtered_posts_list.html' with title="Naposledy pridané príspevky" posts_profiles=most_recent_tuples %}
+</div>
 {% endblock %}

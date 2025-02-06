@@ -1,4 +1,4 @@
-# Fórum stránka
+![image](https://github.com/user-attachments/assets/8edd2a0c-66e3-4e24-89eb-5aa423091680)# Fórum stránka
 Stránka je jednoduché fórum kde sa užívatelia môžu pripojiť, a diskutovať medzi sebou.
 Po načítaní stránky sú užívateľovi zobrazené najviac likeované príspevky, pod pojmom Horúce Témy.
 Ďalej sú užívateľovi zobrazené posledne pridané príspevky.
@@ -20,4 +20,15 @@ od všetkých používateľov, nie len svoje. Tieto príspevky môže manažova�
 
 Používateľ po kliknutí na kartu "Profil" vidí svoj profil ktorý si môže aj editovať. Ak vyberie túto možnosť editácie,
 môže svoje údaje zmeniť a uložiť ich, ale môže aj svoj profil vymazať.
+
+### Neprihlásený screenshot
+![alt text](https://github.com/jantakac/VAII-semestralka/blob/main/readme_screenshot.PNG)
+
+### Prihlásený screenshot
+![alt_text](https://github.com/jantakac/VAII-semestralka/blob/main/readme_screenshotLoggedIn.PNG)
+
+
+## Spustenie
+Spustenie stránky je pomocou príkazu:
+python manage.py runserver
 

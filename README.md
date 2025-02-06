@@ -29,6 +29,8 @@ môže svoje údaje zmeniť a uložiť ich, ale môže aj svoj profil vymazať.
 
 
 ## Spustenie
+Na spustenie stránky je potrebné mať nainštalovaný django framework
+
 Spustenie stránky je pomocou príkazu:
 ```
 python manage.py runserver

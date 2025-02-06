@@ -191,7 +191,11 @@ def filter_categories(request):
     category = request.GET.get('category')
     sort_by = request.GET.get('sort_by')
 
-    posts = Post.objects.filter(category=category)
+    if category == "all":
+        posts = Post.objects.all()
+    else:
+        posts = Post.objects.filter(category=category)
+
     if sort_by == "descending_date":
         sorted_posts = posts.order_by('-created_at')
     elif sort_by == "ascending_date":

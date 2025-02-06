@@ -22,3 +22,7 @@ Používateľ po kliknutí na kartu "Profil" vidí svoj profil ktorý si môže 
 môže svoje údaje zmeniť a uložiť ich, ale môže aj svoj profil vymazať.
 
 ![alt text](https://github.com/jantakac/VAII-semestralka/blob/main/readme_screenshot.PNG)
+
+## Spustenie
+Spustenie stránky je pomocou príkazu:
+python manage.py runserver

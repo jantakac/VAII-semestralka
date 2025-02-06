@@ -18,9 +18,6 @@ z dropdown menu, ďalej môže užívateľ pridať ikonu príspevku a ďalšie o
 Keď je užívateľ príhlásený, svoje príspevky môže manažovať v karte "Moje príspevky", kde keď je prihlásený ako admin tak vidí príspevky
 od všetkých používateľov, nie len svoje. Tieto príspevky môže manažovať editovaním kontentu príspevku alebo jeho vymazaním.
 
-
-
-
-
-
+Používateľ po kliknutí na kartu "Profil" vidí svoj profil ktorý si môže aj editovať. Ak vyberie túto možnosť editácie,
+môže svoje údaje zmeniť a uložiť ich, ale môže aj svoj profil vymazať.
 

@@ -21,3 +21,4 @@ od všetkých používateľov, nie len svoje. Tieto príspevky môže manažova�
 Používateľ po kliknutí na kartu "Profil" vidí svoj profil ktorý si môže aj editovať. Ak vyberie túto možnosť editácie,
 môže svoje údaje zmeniť a uložiť ich, ale môže aj svoj profil vymazať.
 
+![alt text](https://github.com/jantakac/VAII-semestralka/blob/main/readme_screenshot.PNG)

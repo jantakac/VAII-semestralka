@@ -29,9 +29,9 @@ htmx_urlpatterns = [
     path('add-comment/', views.add_comment, name='add_comment'),
     path('edit-comment/', views.edit_comment, name='edit_comment'),
     path('delete-comment/', views.delete_comment, name='delete_comment'),
-
     path('edit-my-post/', views.edit_my_post, name='edit_my_post'),
     path('delete-my-post/', views.delete_my_post, name='delete_my_post'),
+
     #GET ajax
     path('categories/filter/', views.filter_categories, name='filter_categories'),
     path('my-posts/sort/', views.sort_my_posts, name='sort_my_posts'),

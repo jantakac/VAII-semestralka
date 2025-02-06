@@ -2,7 +2,8 @@
     <div class="card {{ bg }} text-white mb-4">
         <div class="card-body text-center">
             <h5 class="card-title">{{ title }}</h5>
-            <button class="btn btn-light"
+            <button class="btn btn-light btn-select-category"
+                data-category="{{ db_category_name }}"
                 hx-trigger="click"
                 hx-get="{% url 'forum:filter_categories' %}?category={{ db_category_name|urlencode }}"
                 hx-target="#post-list"

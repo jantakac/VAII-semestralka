@@ -1,4 +1,5 @@
 {% extends 'forum/base.html' %}
+{% load static %}
 
 {% block title %}Kategórie{% endblock %}
 {% block categories_active %}active{% endblock %}
@@ -7,6 +8,7 @@
 
 <div class="container my-5">
     <h2 class="text-center mb-4">Kategórie</h2>
+
     <div class="row">
         {% include 'forum/partials/category_card.html' with title="Programovanie" db_category_name="programming" bg="bg-primary" %}
         {% include 'forum/partials/category_card.html' with title="Technológie" db_category_name="technology" bg="bg-success" %}
@@ -20,8 +22,37 @@
     <div class="row">
         {% include 'forum/partials/category_card.html' with title="Ostatné" db_category_name="other" bg="bg-primary" %}
     </div>
+    <!--
+    <input type="hidden" name="category" id="selected-category">
+    -->
+    <div class="d-flex justify-content-center mt-4">
+        <div class="dropdown">
+            <button class="btn btn-lg btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Zoradiť podľa
+            </button>
+            <ul class="dropdown-menu">
+                <li><button id="btn-likes" type="button" class="dropdown-item"
+                        hx-trigger="click"
+                        hx-get="{% url 'forum:filter_categories' %}"
+                        hx-target="#post-list"
+                        hx-push-url="true">Od najviac like-ov</button></li>
+                <li><button id="btn-newest" type="button" class="dropdown-item"
+                        hx-trigger="click"
+                        hx-get="{% url 'forum:filter_categories' %}"
+                        hx-target="#post-list"
+                        hx-push-url="true">Od najnovšieho</button></li>
+                <li><button id="btn-oldest" type="button" class="dropdown-item"
+                        hx-trigger="click"
+                        hx-get="{% url 'forum:filter_categories' %}"
+                        hx-target="#post-list"
+                        hx-push-url="true">Od najstaršieho</button></li>
+            </ul>
+        </div>
+    </div>
+
     <div id="post-list">
         {% include 'forum/partials/filtered_posts_list.html' with title="Vyfiltrované posty"%}
     </div>
 </div>
+<script src="{% static 'forum/js/categories_js.js' %}"></script>
 {% endblock %}

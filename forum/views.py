@@ -189,9 +189,19 @@ def like_post(request):
 
 def filter_categories(request):
     category = request.GET.get('category')
+    sort_by = request.GET.get('sort_by')
+
     posts = Post.objects.filter(category=category)
-    profiles = [Profile.objects.get(user_id=post.created_by_id) for post in posts]
-    posts_profiles = list(zip(posts, profiles))
+    if sort_by == "descending_date":
+        sorted_posts = posts.order_by('-created_at')
+    elif sort_by == "ascending_date":
+        sorted_posts = posts.order_by('created_at')
+    else:
+        sorted_posts = posts.order_by('-like_count')
+
+    profiles = [Profile.objects.get(user_id=post.created_by_id) for post in sorted_posts]
+    posts_profiles = list(zip(sorted_posts, profiles))
+
     return render(request, 'forum/partials/filtered_posts_list.html', {'title': 'Vyfiltrované posty', 'posts_profiles': posts_profiles})
 
 

@@ -12,6 +12,13 @@ zaregistrovali. Dá sa aj kliknúť na zobrazenie používateľa kde sa následn
 Používateľ môže pridať aj nový príspevok, ak však nie je prihlásený, bude presmerovaný na stránku prihlásenia.
 Po príhlásení táto funkcionalita pridania príspevku funguje podľa očakávaní.
 
+Stránka nového príspevku od užívateľa žiada titulok príspevku, obsah alebo jeho popis, zvolenie kategórie, ktorú si vyberie
+z dropdown menu, ďalej môže užívateľ pridať ikonu príspevku a ďalšie obrázky, ktoré budú zobrazené po zobrazení celého príspevku.
+
+
+
+
+
 
 
 

@@ -9,7 +9,7 @@ stlačením kategórie "všetko". Môže samozrejme stlačiť aj hocijakú inú 
 Používateľ, po vybratí karty "Používatelia" z navbaru, zobrazia sa mu karty so všetkými používateľmi, ktorí sa na stránku
 zaregistrovali. Dá sa aj kliknúť na zobrazenie používateľa kde sa následne zobrazí jeho profil.
 
-Používateľ môže pridať aj nový príspevok, ak však nie je prihlásený.
+Používateľ môže pridať aj nový príspevok, ak však nie je prihlásený, bude presmerovaný na stránku prihlásenia.
 
 
 

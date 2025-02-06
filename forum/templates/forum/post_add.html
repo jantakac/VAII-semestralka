@@ -14,7 +14,6 @@
                 id="{{ form_post.title.id_for_label }}"
                 name="{{ form_post.title.name }}"
                 {% if form_post.title.required %}required{% endif %}/>
-                <!--TODO:content input field treba aby bol na viac riadkov-->
             <label for="{{ form_post.content.id_for_label }}" class="form-label">{{ form_post.content.label }}</label>
                 <textarea
                     cols="100000" rows="6"

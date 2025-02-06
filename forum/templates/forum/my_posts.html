@@ -1,4 +1,5 @@
 {% extends 'forum/base.html' %}
+{% load static %}
 
 {% block title %}Moje príspevky{% endblock %}
 {% block my_posts_active %}active{% endblock %}
@@ -31,4 +32,24 @@
 <div id="my-posts-list">
     {% include 'forum/partials/my_posts_list.html' with posts_profiles=posts_profiles %}
 </div>
+
+<div class="edit-modal" id="id-edit-modal">
+    <div class="edit-modal-content">
+        <h5>Edit contentu príspevku</h5>
+        <span class="btn-close" id="id-btn-close-modal"></span>
+        <div class="input-group">
+            <label>
+                <textarea cols="40" id="id-edit-modal-input" class="form-control"></textarea>
+                <!-- hx-vals je z javascriptu -->
+                <button id="id-btn-save-edit-modal" type="submit" class="mt-2 btn btn-info btn-sm"
+                        hx-trigger="click"
+                        hx-post="{% url 'forum:edit_my_post' %}"
+                        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+                    Ulož
+                </button>
+            </label>
+        </div>
+    </div>
+</div>
+<script src="{% static 'forum/js/my_posts_js.js' %}"></script>
 {% endblock %}

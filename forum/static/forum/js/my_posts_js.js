@@ -1,35 +1,17 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-
-
-    /* JS ktory zobrazuje form, django ifmi je zabezpecene aby sa ukazal iba ked je user prihlaseny,
-            taktiez je zabezpecene aby aj ked sa user dostane do otvorenej form ako neprihlaseny, tak po stlaceni
-            submitu sa vo view dekoracnou anotaciou zabezpeci ze ak neni prihlaseny tak bude presmerovany na login
-            ktory je uvedeny v settings.py */
-    document.getElementById('reply-btn').addEventListener('click', () => {
-        const replyForm = document.getElementById('reply-form');
-        if (replyForm.style.display === 'none' || replyForm.style.display === '') {
-            replyForm.style.display = 'block';
-        } else {
-            replyForm.style.display = 'none';
-        }
-    });
-
-
-    /* modalne edit comment okno */
-
     const editModal = document.getElementById("id-edit-modal");
     const closeBtn = document.getElementById("id-btn-close-modal");
     const editModalInput = document.getElementById("id-edit-modal-input");
     const saveBtn = document.getElementById("id-btn-save-edit-modal");
-    let commentId;
+    let postId;
     function attachButtonListeners() {
-        const editButtons = document.querySelectorAll('.partial-li-comment-edit-button');
+        const editButtons = document.querySelectorAll('.my-post-edit-btn');
         editButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 editModal.classList.add("show");
-                editModalInput.value = button.dataset.commentContent;
-                commentId = button.dataset.idComment;
+                editModalInput.value = button.dataset.postContent;
+                postId = button.dataset.idPost;
             });
         });
     }
@@ -51,15 +33,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     saveBtn.addEventListener("htmx:configRequest", (event) => {
-        if (commentId === undefined) {
+        if (postId === undefined) {
             return;
         }
-        event.detail.parameters['comment_id'] = commentId;
+        event.detail.parameters['post_id'] = postId;
         event.detail.parameters['content'] = editModalInput.value;
+        console.log(postId);
         editModal.classList.remove("show");
     });
 
-    htmx.on('#post-comments', 'htmx:afterSwap', () => {
+    htmx.on('#my-posts-list', 'htmx:afterSwap', () => {
         attachButtonListeners();
     });
 });

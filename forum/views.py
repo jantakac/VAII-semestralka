@@ -94,10 +94,10 @@ def edit_comment(request):
     comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
     new_content = request.POST.get('content')
 
-    if comment.user_id != request.user.id:
+    if not request.user.is_superuser and comment.user_id != request.user.id:
         return HttpResponseForbidden()
 
-    if comment.content is not None:
+    if new_content is not None and new_content != "":
         post = comment.post
         comment.content = "[Edited] " + new_content
         comment.save()
@@ -108,7 +108,7 @@ def edit_comment(request):
 def delete_comment(request):
     comment = get_object_or_404(Comment, id=request.POST.get('comment_id'))
 
-    if comment.user_id != request.user.id:
+    if not request.user.is_superuser and comment.user_id != request.user.id:
         return HttpResponseForbidden()
 
     post = comment.post
@@ -207,7 +207,10 @@ def browse_profile_view(request, profile_id):
 
 @login_required
 def my_posts_view(request):
-    posts = Post.objects.filter(created_by_id=request.user.id)
+    if request.user.is_superuser:
+        posts = Post.objects.all()
+    else:
+        posts = Post.objects.filter(created_by_id=request.user.id)
     return render(request, 'forum/my_posts.html', {'posts': posts})
 
 
@@ -215,12 +218,17 @@ def my_posts_view(request):
 def sort_my_posts(request):
     sort_by = request.GET.get('sort_by')
 
-    if sort_by == "descending_date":
-        sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('-created_at')
-    elif sort_by == "ascending_date":
-        sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('created_at')
+    if request.user.is_superuser:
+        posts = Post.objects.all()
     else:
-        sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('-like_count')
+        posts = Post.objects.filter(created_by_id=request.user.id)
+
+    if sort_by == "descending_date":
+        sorted_posts = posts.order_by('-created_at')
+    elif sort_by == "ascending_date":
+        sorted_posts = posts.order_by('created_at')
+    else:
+        sorted_posts = posts.order_by('-like_count')
     return render(request, 'forum/partials/my_posts_list.html', {'posts': sorted_posts})
 
 @require_POST
@@ -228,5 +236,23 @@ def sort_my_posts(request):
 def delete_my_post(request):
     post = get_object_or_404(Post, id=request.POST.get('post_id'))
     post.delete()
-    posts = Post.objects.filter(created_by_id=request.user.id)
+    if request.user.is_superuser:
+        posts = Post.objects.all()
+    else:
+        posts = Post.objects.filter(created_by_id=request.user.id)
     return render(request, 'forum/partials/my_posts_list.html', {'posts': posts})
+
+@require_POST
+@login_required
+def edit_my_post(request):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    new_content = request.POST.get('content')
+
+    if not request.user.is_superuser and post.created_by_id != request.user.id:
+        return HttpResponseForbidden()
+
+    if new_content is not None and new_content != "":
+        post.content = "[Edited] " + new_content
+        post.save()
+
+    return redirect('forum:my_posts')

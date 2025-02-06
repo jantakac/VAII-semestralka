@@ -6,7 +6,7 @@
                 <div class="list-group-item card mb-2">
                     <strong>{{ comment.user }}</strong>
                     <p>{{ comment.content }}</p>
-                    {% if user.is_authenticated and comment.user_id == user.id %}
+                    {% if user.is_authenticated and comment.user_id == user.id or user.is_superuser %}
                         <!-- delete comment button -->
                         <button type="button" class="btn btn-danger ms-1 partial-li-top-right-position"
                                 hx-trigger="click"

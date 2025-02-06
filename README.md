@@ -10,6 +10,8 @@ Používateľ, po vybratí karty "Používatelia" z navbaru, zobrazia sa mu kart
 zaregistrovali. Dá sa aj kliknúť na zobrazenie používateľa kde sa následne zobrazí jeho profil.
 
 Používateľ môže pridať aj nový príspevok, ak však nie je prihlásený, bude presmerovaný na stránku prihlásenia.
+Po príhlásení táto funkcionalita pridania príspevku funguje podľa očakávaní.
+
 
 
 

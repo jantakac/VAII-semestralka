@@ -10,6 +10,14 @@ class Profile(models.Model):
     image = models.ImageField(default='pf_pics/default.png', upload_to='pf_pics', null=False, blank=True)
     country = models.CharField(max_length=50, null=True, blank=True)
     bio = models.TextField(max_length=150, null=True, blank=True)
+
+    def delete(self, *args, **kwargs):
+        if self.image and self.image != "pf_pics/default.png":
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)
+
+
     def __str__(self):
         return str(self.user.__str__())
 

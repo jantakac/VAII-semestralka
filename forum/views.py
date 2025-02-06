@@ -144,8 +144,10 @@ def profile_edit_view(request):
 @login_required
 def profile_delete_view(request):
     user = request.user
+    profile = request.user.profile
     if request.method == 'POST':
         logout(request)
+        profile.delete()
         user.delete()
         return redirect('forum:index')
     return render(request, 'forum/profile_edit.html')

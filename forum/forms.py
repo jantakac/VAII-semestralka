@@ -66,7 +66,7 @@ class ProfileEditForm(forms.ModelForm):
 class PostAddPostSideForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'category', 'icon']
+        fields = ['title', 'content', 'icon', 'category']
 
 class PostAddImageSideForm(forms.ModelForm):
     class Meta:

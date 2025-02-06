@@ -17,11 +17,25 @@
             <label for="{{ form_post.content.id_for_label }}" class="form-label">{{ form_post.content.label }}</label>
                 <textarea
                     cols="100000" rows="6"
-                    type="{{ form_post.content.field.widget.input_type }}"
                     class="form-control"
                     id="{{ form_post.content.id_for_label }}"
                     name="{{ form_post.content.name }}"
                     {% if form_post.content.required %}required{% endif %}></textarea>
+            <label for="{{ form_post.category.id_for_label }}" class="form-label">{{ form_post.category.label }}</label>
+            <select
+                type="{{ form_post.category.field.widget.input_type }}"
+                class="form-select"
+                id="{{ form_post.category.id_for_label }}"
+                name="{{ form_post.category.name }}"
+                {% if form_post.category.required %}required{% endif %}>
+                    <option value="other">Ostatné</option>
+                    <option value="programming">Programovanie</option>
+                    <option value="technology">Technológie</option>
+                    <option value="games">Hry</option>
+                    <option value="ai">Umelá inteligencia</option>
+                    <option value="gadgets">Gadgety</option>
+                    <option value="tv">Filmy/Seriály</option>
+            </select>
             <label for="{{ form_post.icon.id_for_label }}" class="form-label">{{ form_post.icon.label }}</label>
                 <input
                     type="{{ form_post.icon.field.widget.input_type }}"

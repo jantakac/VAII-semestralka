@@ -59,6 +59,10 @@ document.addEventListener('DOMContentLoaded', () => {
         editModal.classList.remove("show");
     });
 
+    document.getElementById('reply-form').addEventListener('htmx:afterRequest', (evt) => {
+        document.querySelector('textarea[name="content"]').value = '';
+    });
+
     htmx.on('#post-comments', 'htmx:afterSwap', () => {
         attachButtonListeners();
     });

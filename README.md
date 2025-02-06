@@ -15,7 +15,8 @@ Po príhlásení táto funkcionalita pridania príspevku funguje podľa očakáv
 Stránka nového príspevku od užívateľa žiada titulok príspevku, obsah alebo jeho popis, zvolenie kategórie, ktorú si vyberie
 z dropdown menu, ďalej môže užívateľ pridať ikonu príspevku a ďalšie obrázky, ktoré budú zobrazené po zobrazení celého príspevku.
 
-
+Keď je užívateľ príhlásený, svoje príspevky môže manažovať v karte "Moje príspevky", kde keď je prihlásený ako admin tak vidí príspevky
+od všetkých používateľov, nie len svoje. Tieto príspevky môže manažovať editovaním kontentu príspevku alebo jeho vymazaním.
 
 
 

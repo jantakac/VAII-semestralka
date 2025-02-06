@@ -135,13 +135,13 @@
 }
 
 .browse-profiles-imgs {
-    width: 10rem;
-    height: 10rem;
+    max-height: 10rem;
+    width: auto;
     display: block;
     margin-left: auto;
     margin-right: auto;
+    object-fit: cover;
 }
-
 
 
 /* css modal start */

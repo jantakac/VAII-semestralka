@@ -26,55 +26,47 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto">
-                <li class="nav-item black-under-animation">
-                    <a class="nav-link {% block home_active %}{% endblock %}" href="{% url 'forum:index' %}">Domov</a>
-                </li>
-                <li class="nav-item black-under-animation">
-                    <a class="nav-link {% block categories_active %}{% endblock %}" href="{% url 'forum:categories' %}">Kategórie</a>
-                </li>
-                <li class="nav-item black-under-animation">
-                    <a class="nav-link {% block users_active %}{% endblock %}" href="{% url 'forum:browse_profiles' %}">Používatelia</a>
-                </li>
-                <li class="nav-item black-under-animation">
-                    <a class="nav-link {% block about_active %}{% endblock %}" href="{% url 'forum:about' %}">&#9432;</a>
-                </li>
+        <ul class="navbar-nav me-auto">
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block home_active %}{% endblock %}" href="{% url 'forum:index' %}">Domov</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block categories_active %}{% endblock %}" href="{% url 'forum:categories' %}">Kategórie</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block users_active %}{% endblock %}" href="{% url 'forum:browse_profiles' %}">Používatelia</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block about_active %}{% endblock %}" href="{% url 'forum:about' %}">&#9432;</a>
+            </li>
+        </ul>
 
-            </ul>
-            {% if user.is_authenticated %}
-                <ul class="navbar-nav">
-                    <li class="nav-item black-under-animation">
-                        <a class="nav-link {% block my_posts_active %}{% endblock %}" href="{% url 'forum:my_posts' %}">Moje príspevky</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item black-under-animation">
-                        <a class="nav-link {% block post_add_active %}{% endblock %}" href="{% url 'forum:post_add' %}">Nový príspevok</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item black-under-animation">
-                        <a class="nav-link {% block profile_active %}{% endblock %}" href="{% url 'forum:profile' %}">Profil</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item black-under-animation">
-                        <a class="nav-link" href="{% url 'forum:logout' %}">Odhlásiť sa</a>
-                    </li>
-                </ul>
-            {% else %}
-                <ul class="navbar-nav">
-                    <li class="nav-item black-under-animation">
-                        <a class="nav-link" href="{% url 'forum:login' %}">Pridať príspevok</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item black-under-animation">
-                        <a class="nav-link {% block login_active %}{% endblock %}" href="{% url 'forum:login' %}">Prihlásenie</a>
-                    </li>
-                </ul>
-            {% endif %}
-        </div>
+        {% if user.is_authenticated %}
+        <ul class="navbar-nav">
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block my_posts_active %}{% endblock %}" href="{% url 'forum:my_posts' %}">Moje príspevky</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block post_add_active %}{% endblock %}" href="{% url 'forum:post_add' %}">Nový príspevok</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block profile_active %}{% endblock %}" href="{% url 'forum:profile' %}">Profil</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link" href="{% url 'forum:logout' %}">Odhlásiť sa</a>
+            </li>
+        </ul>
+        {% else %}
+        <ul class="navbar-nav">
+            <li class="nav-item black-under-animation">
+                <a class="nav-link" href="{% url 'forum:login' %}">Pridať príspevok</a>
+            </li>
+            <li class="nav-item black-under-animation">
+                <a class="nav-link {% block login_active %}{% endblock %}" href="{% url 'forum:login' %}">Prihlásenie</a>
+            </li>
+        </ul>
+        {% endif %}
+    </div>
     </nav>
 
 {% block content %}

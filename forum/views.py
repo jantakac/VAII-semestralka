@@ -212,7 +212,7 @@ def my_posts_view(request):
 
 
 @login_required
-def sort_my_posts_view(request):
+def sort_my_posts(request):
     sort_by = request.GET.get('sort_by')
 
     if sort_by == "descending_date":
@@ -222,3 +222,11 @@ def sort_my_posts_view(request):
     else:
         sorted_posts = Post.objects.filter(created_by_id=request.user.id).order_by('-like_count')
     return render(request, 'forum/partials/my_posts_list.html', {'posts': sorted_posts})
+
+@require_POST
+@login_required
+def delete_my_post(request):
+    post = get_object_or_404(Post, id=request.POST.get('post_id'))
+    post.delete()
+    posts = Post.objects.filter(created_by_id=request.user.id)
+    return render(request, 'forum/partials/my_posts_list.html', {'posts': posts})

@@ -24,12 +24,15 @@ urlpatterns = [
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 htmx_urlpatterns = [
+    #POST ajax
     path('like-post/', views.like_post, name='like_post'),
     path('add-comment/', views.add_comment, name='add_comment'),
     path('edit-comment/', views.edit_comment, name='edit_comment'),
     path('delete-comment/', views.delete_comment, name='delete_comment'),
+    path('delete-my-post/', views.delete_my_post, name='delete_my_post'),
+    #GET ajax
     path('categories/filter/', views.filter_categories, name='filter_categories'),
-    path('my-posts/sort/', views.sort_my_posts_view, name='sort_my_posts'),
+    path('my-posts/sort/', views.sort_my_posts, name='sort_my_posts'),
 ]
 
 urlpatterns += htmx_urlpatterns

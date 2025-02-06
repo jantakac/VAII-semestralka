@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -23,6 +25,17 @@ class Post(models.Model):
     content = models.TextField()
     category = models.CharField(max_length=50, default='other', null=False, blank=True)
     icon = models.ImageField(upload_to='post_pics', null=True, blank=True)
+
+    def delete(self, *args, **kwargs):
+        for post_image in self.images.all():
+            post_image.delete()
+
+        if self.icon:
+            if os.path.isfile(self.icon.path):
+                os.remove(self.icon.path)
+
+        super().delete(*args, **kwargs)
+
     def __str__(self):
         return self.title
 
@@ -53,3 +66,8 @@ class PostImages(models.Model):
     post = models.ForeignKey(Post, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='post_pics', blank=True, null=True)
 
+    def delete(self, *args, **kwargs):
+        if self.image:
+            if os.path.isfile(self.image.path):
+                os.remove(self.image.path)
+        super().delete(*args, **kwargs)
